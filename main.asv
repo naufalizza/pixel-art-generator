@@ -1,0 +1,43 @@
+WIDTH = 172;
+PALETTE_PATH = "palette\cool-cool-lethal-lava-land-32x.jpg";
+PALETTE_NAME = extractBetween(PALETTE_PATH, "palette\", ".jpg");
+IMAGES_DIR_PATH = "img\";
+IMAGE_PATH = "img\img (1).jpeg";
+STANDALONE = true;
+STANDALONE_IMAGE_PATH = "img\profile.jpg";
+
+INPUT_NUM = 30;
+
+% palette
+palette = imread(PALETTE_PATH); 
+
+if STANDALONE
+    mkdir("output\standalone");
+    IMAGE_PATH = STANDALONE_IMAGE_PATH;
+    filename = extra
+    % original image
+        img = imread(IMAGE_PATH);
+        
+    %     figure; imshow(img); title OriginalImage;
+    %     figure; imshow(to_pixel_art(img, palette, WIDTH)); title PixelArtResult;
+        disp("WRITING " + filename)
+        imwrite(to_pixel_art(img, palette, WIDTH), "output\"+PALETTE_NAME+"\"+filename);
+
+else
+    mkdir("output\"+PALETTE_NAME);
+    for i = 1:INPUT_NUM
+        filename = "img ("+i+").jpeg";
+        IMAGE_PATH = IMAGES_DIR_PATH+filename;
+        % original image
+        img = imread(IMAGE_PATH);
+        
+    %     figure; imshow(img); title OriginalImage;
+    %     figure; imshow(to_pixel_art(img, palette, WIDTH)); title PixelArtResult;
+        disp("WRITING " + filename)
+        imwrite(to_pixel_art(img, palette, WIDTH), "output\"+PALETTE_NAME+"\"+filename);
+    end
+    imwrite(palette, "output\"+PALETTE_NAME+"\_original_palette.jpeg");
+end
+
+
+
